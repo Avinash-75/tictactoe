@@ -1,38 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Square from './Square';
 
-const Board = () => {
-  const [board, setBoard] = useState(Array(9).fill(null)); // board is state and
-  // setBoard is update function to update the values from null to X or O
-
-  // console.log(setBoard);
-  // console.log(board);
-
-  // we need another state to keep track of next player just like above setBoard
-  // isXNext = boolean value, represents current player
-  // setisXNext = update function from O to X & X to O
-
-  const [isXNext, setisXNext] = useState(false);
-
-  const handleSquareClick = position => {
-    if (board[position]) {
-      return;
-    }
-
-    setBoard(prev => {
-      // prev -> previous state of the Board
-
-      return prev.map((square, pos) => {
-        if (pos === position) {
-          return isXNext ? 'X' : 'O';
-        }
-
-        return square;
-      });
-    });
-
-    setisXNext(prev => !prev);
-  };
+const Board = ({ board, handleSquareClick }) => {
 
   const renderPosition = position => {
     // custom Function
