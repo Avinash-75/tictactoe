@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import Board from './components/Board';
 import { calculateWinner } from './helpers';
+import History from './components/History';
 
 import './styles/root.scss';
 
 const App = () => {
-
   const [history, setHistory] = useState([
-    { board : Array(9).fill(null), isXNext: true },
-  ] ); // board is state and
+    { board: Array(9).fill(null), isXNext: true },
+  ]); // board is state and
   // setBoard is update function to update the values from null to X or O
 
   // console.log(setBoard);
@@ -26,8 +26,8 @@ const App = () => {
 
   const winner = calculateWinner(current.board);
   const Message = winner
-  ? `Winner is ${winner}`
-  : `Next player is ${current.isXNext ? 'X' : 'O' }`;
+    ? `Winner is ${winner}`
+    : `Next player is ${current.isXNext ? 'X' : 'O'}`;
 
   const handleSquareClick = position => {
     if (current.board[position] || winner) {
@@ -38,7 +38,7 @@ const App = () => {
       // prev -> previous state of the Board
       const last = prev[prev.length - 1];
 
-      const newBoard =  last.board.map((square, pos) => {
+      const newBoard = last.board.map((square, pos) => {
         if (pos === position) {
           return last.isXNext ? 'X' : 'O';
         }
@@ -46,12 +46,15 @@ const App = () => {
         return square;
       });
 
-      return prev.concat( {board: newBoard, isXNext: !last.isXNext} );
+      return prev.concat({ board: newBoard, isXNext: !last.isXNext });
     });
 
     // setisXNext(prev => !prev);
-    setCurrentMove( prev => prev + 1);
+    setCurrentMove(prev => prev + 1);
+  };
 
+  const moveTo = move => {
+    setCurrentMove(move);
   };
 
   return (
@@ -59,6 +62,7 @@ const App = () => {
       <h1>TIC TAC TOE</h1>
       <h2>{Message}</h2>
       <Board board={current.board} handleSquareClick={handleSquareClick} />
+      <History history={history} moveTo={moveTo} currentMove={currentMove} />
     </div>
   );
 };
