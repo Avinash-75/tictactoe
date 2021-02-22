@@ -11,7 +11,7 @@ const History = ({ history, moveTo, currentMove }) => {
                 // style={{
                 //   fontWeight: move === currentMove ? 'bold' : 'normal',
                 // }}
-                className={`btn-move ${move == currentMove ? 'active' : ''}`}
+                className={`btn-move ${move === currentMove ? 'active' : ''}`}
                 type="button"
                 onClick={() => {
                   moveTo(move);
