@@ -18,6 +18,11 @@ const History = ({ history, moveTo, currentMove }) => {
                 }}
               >
                 {move === 0 ? 'Start the Game' : `Go to move #${move}`}
+                {/* {move <= 9
+                  ? move === 0
+                    ? 'Start the Game'
+                    : `Go to move #${move}`
+                  : ''} */}
               </button>
             </li>
           );
